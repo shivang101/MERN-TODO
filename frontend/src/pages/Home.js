@@ -20,7 +20,7 @@ export default function Home() {
   }, []);
   console.log(tasks);
   return (
-    <div className="grid grid-cols-5 gap-4 ">
+    <div className="grid grid-cols-5 ">
       <div className="flex flex-col col-span-3 border-2 border-stone-900 ">
         {tasks && tasks.map((task) => <Todo key={task._id} todo={task} />)}
       </div>

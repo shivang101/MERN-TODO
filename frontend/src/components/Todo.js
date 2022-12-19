@@ -6,6 +6,7 @@ export default function Todo({ todo }) {
   const day = time.getDate();
   const hour = time.getHours();
   const min = time.getMinutes();
+
   return (
     <section className="mx-16 my-10 ">
       <h1>{`This task was made on ${day} of ${month} ${hour}:${min} mins`}</h1>
