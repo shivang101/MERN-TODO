@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useTaskContext } from "../hooks/useTaskContext";
 
 export default function Form() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [completed, setCompleted] = useState(false);
   const [error, setError] = useState(null);
+
+  const { dispatch } = useTaskContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,6 +32,7 @@ export default function Form() {
       setCompleted(false);
       setError(null);
       console.log("new task added", json);
+      dispatch({ type: "CREATE_TASK", payload: json });
     }
   };
 

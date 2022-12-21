@@ -1,19 +1,20 @@
-import React from "react";
+import React, { useReducer } from "react";
 import { useEffect, useState } from "react";
-
+import { useTaskContext } from "../hooks/useTaskContext";
 //component
 import Todo from "../components/Todo";
 import Form from "../components/Form";
 
 export default function Home() {
-  const [tasks, setTasks] = useState(null);
+  const { tasks, dispatch } = useTaskContext();
+
   useEffect(() => {
     const fetchTasks = async () => {
       const response = await fetch("/tasks");
       const json = await response.json();
 
       if (response.ok) {
-        setTasks(json);
+        dispatch({ type: "SET_TASKS", payload: json });
       }
     };
     fetchTasks();
