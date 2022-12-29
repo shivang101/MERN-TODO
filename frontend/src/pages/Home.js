@@ -1,5 +1,4 @@
-import React, { useReducer } from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useTaskContext } from "../hooks/useTaskContext";
 //component
 import Todo from "../components/Todo";
@@ -18,11 +17,11 @@ export default function Home() {
       }
     };
     fetchTasks();
-  }, []);
+  }, [dispatch]);
   console.log(tasks);
   return (
-    <div className="grid grid-cols-5 ">
-      <div className="flex flex-col col-span-3 border-2 border-stone-900 ">
+    <div className="grid grid-cols-5  bg-gray-100 min-h-screen ">
+      <div className="flex flex-col col-span-3  ">
         {tasks && tasks.map((task) => <Todo key={task._id} todo={task} />)}
       </div>
       <div className="col-span-2">

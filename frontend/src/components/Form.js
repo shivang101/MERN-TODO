@@ -9,6 +9,7 @@ export default function Form() {
 
   const { dispatch } = useTaskContext();
 
+  const [emptyFields, setEmptyFields] = useState([]);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const task = { title, description, completed };
@@ -25,8 +26,8 @@ export default function Form() {
 
     if (!response.ok) {
       setError(json.error);
+      setEmptyFields(json.emptyFields);
     } else {
-      console.log(error);
       setTitle("");
       setDescription("");
       setCompleted(false);
@@ -48,8 +49,16 @@ export default function Form() {
         <div className="flex w-full items-center">
           <label>Title: </label>
           <input
-            className="bg-green-50 border border-green-500 placeholder-green-700 dark:placeholder-green-500 text-lg rounded-lg focus:ring-green-500 focus:border-green-500 mx-2 w-full p-2.5"
-            placeholder="Enter Title"
+            className={`bg-green-50 border border-green-500 placeholder-green-700 text-lg rounded-lg focus:ring-green-500 focus:border-green-500 mx-2 w-full p-2.5 ${
+              emptyFields.includes("title")
+                ? "border-2 border-red-600 placeholder-red-700"
+                : ""
+            }`}
+            placeholder={`${
+              emptyFields.includes("title")
+                ? "This Field is required "
+                : "Enter Title"
+            }`}
             type="text"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
