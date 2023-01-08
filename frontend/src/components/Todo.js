@@ -1,5 +1,7 @@
 import { useTaskContext } from "../hooks/useTaskContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { useAuthContext } from "../hooks/useAuthContext";
+
 export default function Todo({ todo }) {
   let time = new Date(todo.createdAt);
   const month = time.toLocaleString("default", { month: "short" });
@@ -8,10 +10,17 @@ export default function Todo({ todo }) {
   const min = time.getMinutes();
 
   const { dispatch } = useTaskContext();
+  const { user } = useAuthContext();
 
   const handleClick = async () => {
+    if (!user) {
+      return;
+    }
     const response = await fetch("/tasks/" + todo._id, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
     });
     const json = await response.json();
     console.log(json);

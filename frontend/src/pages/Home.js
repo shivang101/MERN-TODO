@@ -1,23 +1,32 @@
 import { useEffect } from "react";
 import { useTaskContext } from "../hooks/useTaskContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 //component
 import Todo from "../components/Todo";
 import Form from "../components/Form";
 
 export default function Home() {
   const { tasks, dispatch } = useTaskContext();
-
+  const { user } = useAuthContext();
   useEffect(() => {
     const fetchTasks = async () => {
-      const response = await fetch("/tasks");
+      console.log(user.token);
+
+      const response = await fetch("/tasks", {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       const json = await response.json();
 
       if (response.ok) {
         dispatch({ type: "SET_TASKS", payload: json });
       }
     };
-    fetchTasks();
-  }, [dispatch]);
+    if (user) {
+      fetchTasks();
+    }
+  }, [dispatch, user]);
   console.log(tasks);
   return (
     <div className="grid grid-cols-5  bg-gray-100 min-h-screen ">

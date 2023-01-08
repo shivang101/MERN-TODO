@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { useTaskContext } from "../hooks/useTaskContext";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function Form() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [completed, setCompleted] = useState(false);
+  const [completed, setCompleted] = useState("false");
   const [error, setError] = useState(null);
 
   const { dispatch } = useTaskContext();
+  const { user } = useAuthContext();
 
   const [emptyFields, setEmptyFields] = useState([]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) {
+      setError("You Must be Logged in");
+      return;
+    }
     const task = { title, description, completed };
 
     const response = await fetch("/tasks/", {
@@ -20,6 +27,7 @@ export default function Form() {
 
       headers: {
         "Content-type": "application/json",
+        Authorization: `Bearer ${user.token}`,
       },
     });
     const json = await response.json();
