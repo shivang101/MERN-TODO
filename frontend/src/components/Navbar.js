@@ -11,19 +11,20 @@ export default function Navbar() {
     logout();
   };
   return (
-    <header className="text-3xl flex mx-16 p-8 border-b-2 border-green-400  ">
+    <header className="text-3xl flex justify-between mx-16 p-8 border-b-2 border-green-400  ">
       <Link to="/">
-        <h1>Task Manager</h1>
+        <h1>Workout Tracker</h1>
       </Link>
-      <nav>
+
+      <nav className="mx-3 flex gap-9">
         {user && (
-          <div>
+          <div className="mx-3 flex gap-9">
             <span>{user.user.name}</span>
             <button onClick={handleClick}>Log out</button>
           </div>
         )}
         {!user && (
-          <div>
+          <div className="flex gap-6">
             <Link to="/login">Login</Link>
             <Link to="/signup">Signup</Link>
           </div>
