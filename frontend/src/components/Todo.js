@@ -38,7 +38,7 @@ export default function Todo({ todo }) {
       </h2>
       <div className="flex justify-between ">
         <h4 className="text-2xl font-bold text-green-600">{todo.title}</h4>
-        <span className="material-symbols-outlined" onClick={handleClick}>
+        <span className="material-symbols-outlined cursor-pointer" onClick={handleClick}>
           Delete
         </span>
       </div>

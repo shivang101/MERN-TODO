@@ -1,5 +1,4 @@
 const express = require("express");
-
 require("./db/mongoose");
 
 const userRouter = require("./routers/user");
@@ -16,11 +15,11 @@ app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
 });
 
-const User = require("./models/user");
+// const User = require("./models/user");
 
-const main = async () => {
-  const user = await User.findById("63b1bd23bb164208ddedf18f");
-  await user.populate("tasks");
-  console.log(user.tasks);
-};
-main();
+// const main = async () => {
+//   const user = await User.findById("63b1bd23bb164208ddedf18f");
+//   await user.populate("tasks");
+//   console.log(user.tasks);
+// };
+// main();

@@ -44,7 +44,7 @@ const Signup = () => {
       />
 
       <div className="flex flex-col items-center mt-10">
-      <button className="text-3xl font-ab rounded-lg" disabled={isLoading}>Login In</button>
+      <button className="text-3xl font-ab rounded-lg" disabled={isLoading}>Sign Up </button>
       {error && <div className="error">{error}</div>}
       <span className="mt-4">Already a member?
       </span>

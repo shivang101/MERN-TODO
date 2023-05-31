@@ -15,7 +15,9 @@ export const useLogin = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, name }),
     });
+
     const json = await response.json();
+
     if (!response.ok) {
       setIsLoading(false);
       setError(json.error);
@@ -24,6 +26,7 @@ export const useLogin = () => {
       dispatch({ type: "LOGIN", payload: json });
       setIsLoading(false);
     }
+
   };
   return { login, isLoading, error };
 };
